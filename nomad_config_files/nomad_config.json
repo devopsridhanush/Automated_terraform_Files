@@ -1,0 +1,29 @@
+{
+    "datacenter": "testing",
+    "data_dir": "/opt/nomad",
+    "name": "sentinel-1",
+    "server": {
+        "enabled": true,
+        "bootstrap_expect": 3
+    },
+    "client": {
+        "enabled": true,
+        "node_class": "testing-stack",
+        "meta": {
+            "type": "server"
+        }
+    },    
+    "consul": {
+        "address": "localhost:8501",
+	"token": "28b59dce-efe1-d34c-63d7-47afd627d292",
+        "server_service_name": "nomad",
+        "client_service_name": "nomad-client",
+	    "auto_advertise": true,
+        "server_auto_join": true,
+        "client_auto_join": true,
+        "ssl": true,
+        "ca_file": "/var/certs/consul/consul-agent-ca.pem",
+        "cert_file": "/var/certs/consul/testing-server-consul-0.pem",
+        "key_file": "/var/certs/consul/testing-server-consul-0-key.pem"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "datacenter": "testing",
+    "node_name": "sentinel-1",
+    "bind_addr": "{{ GetPrivateInterfaces | include \"network\" \"172.0.0.0/8\" | attr \"address\" }}",
+    "log_level": "debug",
+    "ui": true,
+    "client_addr": "0.0.0.0",
+    "data_dir": "/opt/consul/",
+    "server": true,
+    "bootstrap_expect": 3,
+    "connect": {
+        "enabled": true
+    },
+    "retry_join": ["provider=aws tag_key=test_server tag_value=yes region=ap-southeast-1 access_key_id=AKIAXPZJBAQDYHAHTWQX secret_access_key=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"],
+    "encrypt": "XAAB/Nepu28KGwt3VjROvAquRIrwP01gIkZeYqrwd54="
+}

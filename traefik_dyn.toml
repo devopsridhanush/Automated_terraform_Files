@@ -1,0 +1,17 @@
+[http.routers.api]
+  rule = "Host(`traefik.tebbythomas.com`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))" 
+  service = "api@internal"
+
+[http.middlewares.auth.basicAuth]
+  users = [
+    "admin:$apr1$cartszdi$7k2uBbfd3ln7pLW5U3cMD0" 
+  ]
+
+[tls.options]
+
+  [tls.options.default]
+    minVersion = "VersionTLS12"
+
+  [tls.options.mintls13]
+    minVersion = "VersionTLS13"
+

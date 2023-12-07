@@ -1,0 +1,79 @@
+[[instances]]
+    host = "127.0.0.1"
+    port = "8080"
+    path = "/health"
+    scheme = "http"
+
+[api]
+    dashboard = true
+
+[log]
+    level = "INFO"
+
+[entryPoints.ping]
+    address = ":8082"
+[ping]
+  entryPoint = "ping"
+
+[entryPoints.web]
+    address = ":80"
+    [entryPoints.web.forwardedHeaders]
+      trustedIPs = ["172.31.0.0/16"]
+
+[entryPoints.stomp]
+    address = ":61613"
+
+[entryPoints.wsstomp]
+    address = ":61614"
+
+[entryPoints.websecure]
+    address = ":443"
+    [entryPoints.websecure.forwardedHeaders]
+      trustedIPs = ["172.31.0.0/16"]
+
+[entryPoints.api]
+    address = ":8080"
+
+[entryPoints.api.http.redirections]
+    [entryPoints.api.http.redirections.entryPoint]
+        to = "websecure"
+        scheme = "https"
+
+[entryPoints.web.http.redirections]
+    [entryPoints.web.http.redirections.entryPoint]
+        to = "websecure"
+        scheme = "https"
+
+[entryPoints.websecure.http.tls]
+    certResolver = "myresolver"
+
+    [[entryPoints.websecure.http.tls.domains]]
+        main = "*.tebbythomas.com"
+        sans = ["tebbythomas.com"]
+
+[providers]
+    [providers.file]
+        directory = "/etc/traefik.d/dyn/"
+        watch = true
+
+    [providers.consulCatalog]
+        refreshInterval = "2s"
+        exposedByDefault = false
+        [providers.consulCatalog.endpoint]
+            address = "127.0.0.1:8501"
+            token = "28b59dce-efe1-d34c-63d7-47afd627d292"
+            scheme = "https"
+        [providers.consulCatalog.endpoint.tls]
+            ca = "/var/certs/consul/consul-agent-ca.pem"
+            cert = "/var/certs/consul/testing-server-consul-0.pem"
+            key = "/var/certs/consul/testing-server-consul-0-key.pem"
+            insecureSkipVerify = true
+
+[certificatesResolvers.myresolver.acme]
+    email = "tebbyt@sensehawk.com"
+    storage = "/etc/traefik.d/acme.json"
+
+    [certificatesResolvers.myresolver.acme.dnsChallenge]
+        provider = "route53"
+        delayBeforeCheck = "90"
+        resolvers = ["1.1.1.1:53", "8.8.8.8:53"]

@@ -1,0 +1,8 @@
+{ 
+    "datacenter": "testing",
+    "data_dir": "/opt/consul",
+    "retry_join": ["provider=aws tag_key=test_server tag_value=yes region=ap-southeast-1 access_key_id=AKIAXPZJBAQDYHAHTWQX secret_access_key=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"],
+    "bind_addr": "{{ GetInterfaceIP \"eth0\" }}",
+    "client_addr": "0.0.0.0",
+    "encrypt": "XAAB/Nepu28KGwt3VjROvAquRIrwP01gIkZeYqrwd54="
+}

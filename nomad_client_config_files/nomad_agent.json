@@ -1,0 +1,27 @@
+{
+    "datacenter": "testing",
+    "data_dir": "/opt/nomad",
+    "name": "testing-asg-client",
+    "client": {
+        "enabled": true,
+	"node_class": "testing-stack",
+	"meta": {
+	    "type": "client"
+	 }
+    },
+    "consul": {
+        "address": "localhost:8501",
+        "grpc_ca_file" : "/var/certs/consul/consul-agent-ca.pem",
+        "grpc_address" : "127.0.0.1:8502",
+        "token": "da9882bc-5697-887f-81da-fba64d81eb49",
+        "server_service_name": "nomad",
+        "client_service_name": "nomad-client",
+        "auto_advertise": true,
+        "server_auto_join": true,
+        "client_auto_join": true,
+        "ssl": true,
+        "ca_file": "/var/certs/consul/consul-agent-ca.pem",
+        "cert_file": "/var/certs/consul/testing-client-consul-0.pem",
+        "key_file": "/var/certs/consul/testing-client-consul-0-key.pem"
+    }
+}

@@ -1,5 +1,9 @@
+variable "node_name" {
+  description = "Name of the Consul node"
+}
+
 data "aws_instance" "client_terraform" {
-  instance_id = "i-08021e9e06d27047a"
+  instance_id = "i-03b67935a877c7f1b"
 }
 
 resource "null_resource" "update_instance" {
@@ -11,6 +15,7 @@ resource "null_resource" "update_instance" {
     command = <<EOT
       ssh -i /home/ubuntu/keys/To_Be_Deleted_Singapore.pem ubuntu@${data.aws_instance.client_terraform.private_ip} 'sudo rm -f /etc/consul.d/*'
       scp -i /home/ubuntu/keys/To_Be_Deleted_Singapore.pem /home/ubuntu/consul_config_files/consul_agent.json ubuntu@${data.aws_instance.client_terraform.private_ip}:/tmp/agent.json
+      ssh -i /home/ubuntu/keys/To_Be_Deleted_Singapore.pem ubuntu@${data.aws_instance.client_terraform.private_ip} "sudo sed -i 's/\"node_name\": \"sentinel-1\"/\"node_name\": \"${var.node_name}\"/' /tmp/agent.json"
       scp -i /home/ubuntu/keys/To_Be_Deleted_Singapore.pem /home/ubuntu/consul_config_files/consul_acl.json ubuntu@${data.aws_instance.client_terraform.private_ip}:/tmp/acl.json
       scp -i /home/ubuntu/keys/To_Be_Deleted_Singapore.pem /home/ubuntu/consul_config_files/consul_connect.json ubuntu@${data.aws_instance.client_terraform.private_ip}:/tmp/connect.json
       scp -i /home/ubuntu/keys/To_Be_Deleted_Singapore.pem /home/ubuntu/consul_config_files/consul_tls.json ubuntu@${data.aws_instance.client_terraform.private_ip}:/tmp/tls.json

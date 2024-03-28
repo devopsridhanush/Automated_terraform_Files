@@ -6,9 +6,9 @@ After=network-online.target
 
 [Service]
 Type=simple
-Environment="AWS_ACCESS_KEY_ID=AKIAXPZJBAQDV5VY2FFD"
-Environment="AWS_SECRET_ACCESS_KEY=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"
-Environment="AWS_HOSTED_ZONE_ID=Z091937128KYA7WIP9QCR"
+Environment="AWS_ACCESS_KEY_ID=xxxxxxxxx"
+Environment="AWS_SECRET_ACCESS_KEY=xxxxxxxx"
+Environment="AWS_HOSTED_ZONE_ID=xxxxxxxxxx"
 Environment="AWS_REGION=us-east-1"
 ExecStart=/usr/bin/traefik --configfile=/etc/traefik.d/static.toml
 KillMode=process

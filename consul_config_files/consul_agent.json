@@ -11,6 +11,6 @@
     "connect": {
         "enabled": true
     },
-    "retry_join": ["provider=aws tag_key=test_server tag_value=yes region=ap-southeast-1 access_key_id=AKIAXPZJBAQDYHAHTWQX secret_access_key=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"],
-    "encrypt": "XAAB/Nepu28KGwt3VjROvAquRIrwP01gIkZeYqrwd54="
+    "retry_join": ["provider=aws tag_key=test_server tag_value=yes region=ap-southeast-1 access_key_id=xxxxxxxxxxx secret_access_key=xxxxxxxxx"],
+    "encrypt": "XXXXXXXXX"
 }
